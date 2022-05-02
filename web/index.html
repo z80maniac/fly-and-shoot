@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+SPDX-License-Identifier: GPL-3.0-only
+🄯 2022, Alexey Parfenov <zxed@alkatrazstudio.net>
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="assets/player.png">
+    <title>FLY AND SHOOT</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: rgb(8, 8, 8);
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      body.loading:after {
+        content: "Loading...";
+        position: absolute;
+        z-index: -1;
+        left: 50%;
+        top: 50%;
+        color: white;
+        font-style: italic;
+        transform: translateX(-50%) translateY(10px);
+      }
+
+      canvas {
+        background: white;
+        width: auto!important;
+        height: 100vh!important;
+        max-width: 100vw!important;
+        cursor: none;
+        outline: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      #info {
+        align-self: center;
+        color: rgb(166, 153, 234);
+        font-family: monospace;
+      }
+
+      #info .notes {
+        padding-top: 50px;
+      }
+
+      #info a {
+        color: rgb(255, 148, 148);
+        cursor: pointer;
+      }
+
+      #info #start-game-link {
+        color: rgb(75, 161, 13);
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      h1 {
+        text-shadow: 1px 1px red;
+        text-transform: uppercase;
+      }
+
+      footer {
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <script type="module">
+    import init from './wasm/flyandshoot.js'
+
+    let canvasFocusTimer
+
+    async function startGame () {
+      document.getElementById('info').remove()
+
+      if(document.fullscreenEnabled) {
+        try {
+          await document.body.requestFullscreen()
+        }catch(e) {
+        }
+      }
+
+      canvasFocusTimer = setInterval(focusCanvas, 100)
+      document.body.classList.add('loading')
+      //init()
+    }
+
+    function focusCanvas() {
+      const canvas = document.getElementsByTagName('canvas')[0]
+      if(!canvas)
+        return
+
+      canvas.focus()
+      clearInterval(canvasFocusTimer)
+      console.log('timer removed')
+    }
+
+    document.getElementById('start-game-link').addEventListener('click', startGame)
+  </script>
+  <body>
+    <div id="info">
+      <h1>Fly and Shoot</h1>
+      <a id="start-game-link">Click here to launch the game (fullscreen)</a>
+
+      <div class="notes">
+        <p>Chromium-based browser is recommended</p>
+        <p>The game might take some time to load (16MB to download)</p>
+        <p>Press F11 or ESC to exit the fullscreen</p>
+        <p>Click inside the window if the controls are not working</p>
+      </div>
+
+      <footer>
+        <a href="CREDITS.TXT" target="_blank">CREDITS</a>
+        |
+        <a
+          href="https://github.com/z80maniac/fly-and-shoot"
+          target="_blank"
+          rel="noreferrer noopener noopener"
+        >SOURCE CODE</a>
+      </footer>
+    </div>
+  </body>
+</html>

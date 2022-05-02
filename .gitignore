@@ -1,0 +1,14 @@
+/target/
+/assets_src/
+
+/flyandshoot
+.*
+!/.cargo/
+!.gitignore
+
+/web/wasm/
+/web/assets/
+/web/CREDITS.TXT
+
+# Local Netlify folder
+.netlify

@@ -1,0 +1,1 @@
+LD_LIBRARY_PATH=/home/user/dev/rust/flyandshoot/target/debug/deps:/home/user/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/

@@ -1,0 +1,114 @@
+FLY AND SHOOT - CREDITS
+
+🄯 2022, Alkatraz Studio
+License: GPL
+
+
+
+Made with Bevy (https://bevyengine.org)
+
+
+
+**********
+* MUSIC *
+**********
+
+=== title.ogg ===
+"Rammstein style metal"
+by GeriArt
+https://pixabay.com/music/metal-rammstein-style-metal-10726/
+License: https://pixabay.com/service/license/
+(edited)
+
+=== background.ogg ===
+Deflector by Ghostrifter Official | https://soundcloud.com/ghostrifter-official
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+(converted)
+
+=== start.ogg ===
+"Game Start"
+by plasterbrain
+https://pixabay.com/sound-effects/game-start-6104/
+License: https://pixabay.com/service/license/
+(edited)
+
+=== player_bullet.ogg ===
+"Laser2"
+by Daleonfire
+https://freesound.org/people/Daleonfire/sounds/505235/
+License [CC0]: https://creativecommons.org/publicdomain/zero/1.0/
+(edited)
+
+=== enemy_bullet.ogg ===
+"Sci-fi gun shot x6"
+by humanoide9000
+https://pixabay.com/sound-effects/sci-fi-gun-shot-x6-14447/
+License: https://pixabay.com/service/license/
+(edited)
+
+=== explosion.ogg ===
+"explosion_wide_edit.ogg"
+by derplayer
+https://freesound.org/people/derplayer/sounds/587174/
+License [CC0]: https://creativecommons.org/publicdomain/zero/1.0/
+(edited)
+
+
+************
+* GRAPHICS *
+************
+
+=== background.png ===
+by Screaming Brain Studios
+https://opengameart.org/content/seamless-space-backgrounds
+License [CC0]: http://creativecommons.org/publicdomain/zero/1.0/
+(edited)
+
+=== player.png ===
+by Gundy
+https://opengameart.org/content/chocolate-ship-3d-spaceship-asset
+License [CC BY-SA 3.0]: https://creativecommons.org/licenses/by-sa/3.0/
+(rendered)
+
+=== player_exhaust.png ===
+by reivaxcorp
+https://opengameart.org/content/fire-explode
+License [CC0]: http://creativecommons.org/publicdomain/zero/1.0/
+(edited)
+
+=== enemy.png ===
+by little killy
+https://opengameart.org/content/space-ship-3d2d
+License [CC BY 3.0]: https://creativecommons.org/licenses/by/3.0/
+(edited)
+
+=== enemy_exhaust.png ===
+by rubberduck
+https://opengameart.org/content/magic-flame
+License [CC0]: http://creativecommons.org/publicdomain/zero/1.0/
+(edited)
+
+=== player_bullet.png ===
+=== enemy_bullet.png ===
+by Wenrexa
+https://wenrexa.itch.io/laser2020
+License [CC0]: https://wenrexa.itch.io/laser2020/devlog/243646/full-free-cc0-license
+(edited)
+
+=== explosion.png ===
+by Soluna Software
+https://opengameart.org/content/explosion-effects-and-more
+License [CC0]: https://creativecommons.org/publicdomain/zero/1.0/
+(edited)
+
+
+*********
+* FONTS *
+*********
+
+=== font.ttf ===
+by James Grieshaber
+https://fonts.google.com/specimen/Black+Ops+One
+License [OFL]: https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
