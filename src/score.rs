@@ -77,7 +77,8 @@ impl Score {
 fn setup(mut commands: Commands, font: Res<MainFont>) {
     commands.insert_resource(Score::ZERO);
 
-    let text = AnimPlugin::text_bundle(&font.0, "SCORE: 0123456789", 25.0, Vec3::new(0.0, 0.0, 0.1));
+    let text =
+        AnimPlugin::text_bundle(&font.0, "SCORE: 0123456789", 25.0, Vec3::new(0.0, 0.0, 0.1));
 
     commands
         .spawn_bundle(text)

@@ -3,8 +3,8 @@
 
 use bevy::{asset::LoadState, prelude::*};
 
-use crate::state::GameState;
 use crate::collision::Screen;
+use crate::state::GameState;
 
 #[derive(Component)]
 pub struct AnimationTimer {
@@ -62,12 +62,7 @@ impl AnimPlugin {
         return atlas_handle;
     }
 
-    pub fn text_bundle(
-        font: &Handle<Font>,
-        text: &str,
-        font_size: f32,
-        pos: Vec3,
-    ) -> Text2dBundle {
+    pub fn text_bundle(font: &Handle<Font>, text: &str, font_size: f32, pos: Vec3) -> Text2dBundle {
         return Text2dBundle {
             text: Text::with_section(
                 text,
@@ -115,13 +110,13 @@ fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut loading: ResMut<AssetsLoading>,
-    win: Res<WindowDescriptor>
+    win: Res<WindowDescriptor>,
 ) {
     let font_asset = asset_server.load("font.ttf");
     loading.push(font_asset.clone_untyped());
 
-    let mut loading_text = AnimPlugin::text_bundle(
-        &font_asset, "LOADING...", 32.0, win.middle_with_z(1.0));
+    let mut loading_text =
+        AnimPlugin::text_bundle(&font_asset, "LOADING...", 32.0, win.middle_with_z(1.0));
     loading_text.visibility.is_visible = true;
     commands.spawn_bundle(loading_text).insert(LoadingText);
 
@@ -142,13 +137,13 @@ fn check_assets_loaded(
             let (loading_text_entity, _) = loading_q.single_mut();
             commands.entity(loading_text_entity).despawn_recursive();
             state.set(GameState::TitleFlyIn).unwrap();
-        },
+        }
         LoadState::Failed => {
             let (_, mut loading_text) = loading_q.single_mut();
             let mut section = loading_text.sections.first_mut().unwrap();
             section.value = "LOADING FAILED! CHECK THE CONSOLE.".to_string();
             section.style.color = Color::RED;
-        },
+        }
         _ => {}
     }
 }
