@@ -4,6 +4,7 @@
 use bevy::{asset::LoadState, prelude::*};
 
 use crate::state::GameState;
+use crate::collision::Screen;
 
 #[derive(Component)]
 pub struct AnimationTimer {
@@ -62,7 +63,7 @@ impl AnimPlugin {
     }
 
     pub fn text_bundle(
-        font: &Res<MainFont>,
+        font: &Handle<Font>,
         text: &str,
         font_size: f32,
         pos: Vec3,
@@ -71,7 +72,7 @@ impl AnimPlugin {
             text: Text::with_section(
                 text,
                 TextStyle {
-                    font: font.0.clone(),
+                    font: font.clone(),
                     font_size,
                     color: Color::WHITE,
                 },
@@ -99,21 +100,31 @@ impl AssetsLoading {
         return Self(Vec::new());
     }
 
-    fn is_loaded(&self, server: &AssetServer) -> bool {
+    fn loaded_state(&self, server: &AssetServer) -> LoadState {
         let state = server.get_group_load_state(self.iter().map(|h| h.id));
-        return state == LoadState::Loaded;
+        return state;
     }
 }
 
-pub struct MainFont(Handle<Font>);
+pub struct MainFont(pub Handle<Font>);
+
+#[derive(Component)]
+pub struct LoadingText;
 
 fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut loading: ResMut<AssetsLoading>,
+    win: Res<WindowDescriptor>
 ) {
     let font_asset = asset_server.load("font.ttf");
     loading.push(font_asset.clone_untyped());
+
+    let mut loading_text = AnimPlugin::text_bundle(
+        &font_asset, "LOADING...", 32.0, win.middle_with_z(1.0));
+    loading_text.visibility.is_visible = true;
+    commands.spawn_bundle(loading_text).insert(LoadingText);
+
     let res = MainFont(font_asset);
     commands.insert_resource(res);
 }
@@ -123,10 +134,22 @@ fn check_assets_loaded(
     loading: ResMut<AssetsLoading>,
     server: Res<AssetServer>,
     mut state: ResMut<State<GameState>>,
+    mut loading_q: Query<(Entity, &mut Text), With<LoadingText>>,
 ) {
-    if loading.is_loaded(&server) {
-        commands.remove_resource::<AssetsLoading>();
-        state.set(GameState::TitleFlyIn).unwrap();
+    match loading.loaded_state(&server) {
+        LoadState::Loaded => {
+            commands.remove_resource::<AssetsLoading>();
+            let (loading_text_entity, _) = loading_q.single_mut();
+            commands.entity(loading_text_entity).despawn_recursive();
+            state.set(GameState::TitleFlyIn).unwrap();
+        },
+        LoadState::Failed => {
+            let (_, mut loading_text) = loading_q.single_mut();
+            let mut section = loading_text.sections.first_mut().unwrap();
+            section.value = "LOADING FAILED! CHECK THE CONSOLE.".to_string();
+            section.style.color = Color::RED;
+        },
+        _ => {}
     }
 }
 

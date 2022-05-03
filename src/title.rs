@@ -115,7 +115,7 @@ fn setup(
     mut loading: ResMut<AssetsLoading>,
 ) {
     for i in 0..TITLE_SHADOWS {
-        let title = AnimPlugin::text_bundle(&font, "FLY AND SHOOT", 180.0, Vec3::ZERO);
+        let title = AnimPlugin::text_bundle(&font.0, "FLY AND SHOOT", 180.0, Vec3::ZERO);
         commands
             .spawn_bundle(title)
             .insert(TitleShadow { index: i })
@@ -128,7 +128,7 @@ fn setup(
         .insert(Name::new("TitleTimer"));
 
     let instructions = AnimPlugin::text_bundle(
-        &font,
+        &font.0,
         "WASD - MOVEMENT\nM - ATTACK",
         50.0,
         Vec3::new(win.middle_x(), win.middle_y() - 0.25, 0.1),
@@ -139,7 +139,7 @@ fn setup(
         .insert(Name::new("Instructions"));
 
     let action_text = AnimPlugin::text_bundle(
-        &font,
+        &font.0,
         "PRESS ENTER",
         100.0,
         Vec3::new(win.middle_x(), win.middle_y() - 0.35, 0.1),

@@ -85,7 +85,7 @@ fn setup(mut commands: Commands, font: Res<MainFont>, win: Res<WindowDescriptor>
         .insert(Name::new("NewGameTimer"));
 
     let mut gg_text = AnimPlugin::text_bundle(
-        &font,
+        &font.0,
         &GameOverText::gg_text(true),
         GG_TEXT_SIZE,
         win.middle_with_z(GG_TEXT_Z),
