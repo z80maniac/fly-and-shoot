@@ -199,7 +199,7 @@ fn load_assets(
 }
 
 fn movement(mut q: Query<(&Bullet, &mut Transform)>, time: Res<Time>) {
-    for (bullet, mut transform) in q.iter_mut() {
+    for (bullet, mut transform) in &mut q {
         transform.translation += bullet.speed * time.delta_seconds();
     }
 }

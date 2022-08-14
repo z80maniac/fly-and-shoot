@@ -88,7 +88,7 @@ fn stop_bg_music(bg_audio: Res<BackgroundAudio>, audio_sinks: Res<Assets<AudioSi
 }
 
 fn movement(mut q: Query<(&mut Transform, &Background)>, time: Res<Time>) {
-    for (mut bg_pos, bg) in q.iter_mut() {
+    for (mut bg_pos, bg) in &mut q {
         let mut new_x = bg_pos.translation.x - SPEED * time.delta_seconds();
         let min_x = bg.initial_x - SIZE_X;
 

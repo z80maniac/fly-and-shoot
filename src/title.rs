@@ -163,7 +163,7 @@ fn show_title(
     time: Res<Time>,
     win: Res<WindowDescriptor>,
 ) {
-    for (shadow, mut shadow_pos, mut visibility, mut text) in shadows_q.iter_mut() {
+    for (shadow, mut shadow_pos, mut visibility, mut text) in &mut shadows_q {
         let new_pos = shadow.pos_for_time(time.seconds_since_startup(), SHADOW_RADIUS, &win);
         shadow_pos.translation = new_pos;
         visibility.is_visible = true;
@@ -209,7 +209,7 @@ fn fly_in(
 
     let ratio = timer.elapsed_secs() / timer.duration().as_secs_f32();
 
-    for (shadow, mut shadow_pos, mut text) in shadows_q.iter_mut() {
+    for (shadow, mut shadow_pos, mut text) in &mut shadows_q {
         let new_pos = shadow.pos_for_flyin_time(time.seconds_since_startup(), &win, &timer);
         shadow_pos.translation = new_pos;
 
@@ -256,7 +256,7 @@ fn fly_out(
     if timer.just_finished() {
         state.set(GameState::PlayerSlideOut).unwrap();
 
-        for (_, _, _, mut shadow_visibility) in text_set.p0().iter_mut() {
+        for (_, _, _, mut shadow_visibility) in &mut text_set.p0() {
             shadow_visibility.is_visible = false;
         }
 
@@ -270,7 +270,7 @@ fn fly_out(
 
     let ratio = 1.0 - timer.elapsed_secs() / timer.duration().as_secs_f32();
 
-    for (shadow, mut shadow_pos, mut text, _) in text_set.p0().iter_mut() {
+    for (shadow, mut shadow_pos, mut text, _) in &mut text_set.p0() {
         let new_pos = shadow.pos_for_flyout_time(time.seconds_since_startup(), &win, &timer);
         shadow_pos.translation = new_pos;
 
@@ -298,7 +298,7 @@ fn animate_title(
     time: Res<Time>,
     win: Res<WindowDescriptor>,
 ) {
-    for (shadow, mut shadow_pos) in shadows_q.iter_mut() {
+    for (shadow, mut shadow_pos) in &mut shadows_q {
         let new_pos = shadow.pos_for_time(time.seconds_since_startup(), SHADOW_RADIUS, &win);
         shadow_pos.translation = new_pos;
     }

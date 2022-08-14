@@ -171,7 +171,7 @@ fn movement(
 
     let mut target_speed_vector = Vec2::ZERO;
 
-    for (mut transform, mut player) in q.iter_mut() {
+    for (mut transform, mut player) in &mut q {
         if kbd.pressed(KeyCode::A) {
             target_speed_vector -= Vec2::X;
         }
@@ -234,7 +234,7 @@ fn attack(
     audio: Res<Audio>,
     time: Res<Time>,
 ) {
-    for (transform, mut bullet_timer, mut player) in q.iter_mut() {
+    for (transform, mut bullet_timer, mut player) in &mut q {
         bullet_timer.process(time.delta());
 
         if kbd.pressed(KeyCode::M) && bullet_timer.can_shoot && player.heat < 1.0 {
@@ -271,8 +271,8 @@ fn collision_with_enemy(
     explosion_audio: Res<ExplosionAudio>,
     audio: Res<Audio>,
 ) {
-    for (player_pos, player_box, player) in player_query.iter() {
-        for (enemy_pos, enemy_box, enemy) in enemy_query.iter() {
+    for (player_pos, player_box, player) in &player_query {
+        for (enemy_pos, enemy_box, enemy) in &enemy_query {
             if collide(
                 player_pos.translation,
                 player_box.0,
@@ -317,8 +317,8 @@ fn collision_with_bullet(
     audio: Res<Audio>,
     mut game_state: ResMut<State<GameState>>,
 ) {
-    for (player, player_pos, enemy_hitbox) in player_query.iter() {
-        for (bullet, bullet_pos, bullet_hitbox) in enemy_bullet_query.iter() {
+    for (player, player_pos, enemy_hitbox) in &player_query {
+        for (bullet, bullet_pos, bullet_hitbox) in &enemy_bullet_query {
             if collide(
                 player_pos.translation,
                 enemy_hitbox.0,

@@ -96,7 +96,7 @@ fn load_assets(
 }
 
 fn process(mut commands: Commands, q: Query<(Entity, &AnimationTimer), With<Explosion>>) {
-    for (explosion, timer) in q.iter() {
+    for (explosion, timer) in &q {
         if timer.timer.paused() {
             commands.entity(explosion).despawn_recursive();
         }

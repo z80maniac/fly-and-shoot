@@ -108,7 +108,7 @@ fn setup_score_text_for_game(
 
 fn update_score_text(mut q: Query<&mut Text, With<ScoreText>>, score: Res<Score>) {
     if score.is_changed() {
-        for mut text in q.iter_mut() {
+        for mut text in &mut q {
             let mut section = text.sections.first_mut().unwrap();
             section.value = format!("SCORE: {}", score.score);
         }

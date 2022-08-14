@@ -130,16 +130,16 @@ fn wait_for_exit(
     explosions: Query<Entity, With<Explosion>>,
 ) {
     if kbd.just_pressed(KeyCode::Q) {
-        for e in players.iter() {
+        for e in &players {
             commands.entity(e).despawn_recursive();
         }
-        for e in enemies.iter() {
+        for e in &enemies {
             commands.entity(e).despawn_recursive();
         }
-        for e in bullets.iter() {
+        for e in &bullets {
             commands.entity(e).despawn_recursive();
         }
-        for e in explosions.iter() {
+        for e in &explosions {
             commands.entity(e).despawn_recursive();
         }
 

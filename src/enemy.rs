@@ -213,8 +213,8 @@ fn bullet_hit(
     explosion_audio: Res<ExplosionAudio>,
     audio: Res<Audio>,
 ) {
-    for (enemy, enemy_pos, enemy_hitbox) in enemy_query.iter() {
-        for (bullet, bullet_pos, bullet_hitbox) in player_bullet_query.iter() {
+    for (enemy, enemy_pos, enemy_hitbox) in &enemy_query {
+        for (bullet, bullet_pos, bullet_hitbox) in &player_bullet_query {
             if collide(
                 enemy_pos.translation,
                 enemy_hitbox.0,
@@ -243,7 +243,7 @@ fn bullet_hit(
 }
 
 fn movement(mut q: Query<(&Enemy, &mut Transform)>, time: Res<Time>) {
-    for (enemy, mut transform) in q.iter_mut() {
+    for (enemy, mut transform) in &mut q {
         transform.translation += enemy.speed * time.delta_seconds();
     }
 }
@@ -265,7 +265,7 @@ fn attack(
 
         let mut rng = rand::thread_rng();
 
-        for (enemy_transform, mut bullet_timer) in q.iter_mut() {
+        for (enemy_transform, mut bullet_timer) in &mut q {
             bullet_timer.process(time.delta());
 
             if bullet_timer.can_shoot && enemy_transform.translation.x > player_pos.x {

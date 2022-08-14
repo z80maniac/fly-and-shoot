@@ -157,7 +157,7 @@ fn animate_sprite(
         &Handle<TextureAtlas>,
     )>,
 ) {
-    for (mut timer, mut sprite, texture_atlas_handle) in query.iter_mut() {
+    for (mut timer, mut sprite, texture_atlas_handle) in &mut query {
         if timer.timer.paused() {
             continue;
         }

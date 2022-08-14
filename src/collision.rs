@@ -78,7 +78,7 @@ fn destroy_outside_screen(
     q: Query<(Entity, &DestroyOutsideScreen, &Transform)>,
     win: Res<WindowDescriptor>,
 ) {
-    for (entity, destr, transform) in q.iter() {
+    for (entity, destr, transform) in &q {
         let bounds = win.bounds_box_outside(destr.size);
         if transform.translation.x > bounds.right
             || transform.translation.x < bounds.left
