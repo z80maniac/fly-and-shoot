@@ -64,13 +64,17 @@ fn main() {
 }
 
 fn spawn_camera(mut commands: Commands) {
-    let mut camera = OrthographicCameraBundle::new_2d();
-
-    camera.orthographic_projection.top = 1.0;
-    camera.orthographic_projection.bottom = 0.0;
-    camera.orthographic_projection.left = 0.0;
-    camera.orthographic_projection.right = RESOLUTION;
-    camera.orthographic_projection.scaling_mode = ScalingMode::None;
-
-    commands.spawn_bundle(camera).insert(Name::new("Camera"));
+    commands
+        .spawn_bundle(Camera2dBundle {
+            projection: OrthographicProjection {
+                top: 1.0,
+                bottom: 0.0,
+                left: 0.0,
+                right: RESOLUTION,
+                scaling_mode: ScalingMode::None,
+                ..default()
+            },
+            ..default()
+        })
+        .insert(Name::new("Camera"));
 }

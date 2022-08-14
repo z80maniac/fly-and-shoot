@@ -10,8 +10,8 @@ pub trait Screen {
     fn middle_y(&self) -> f32;
     fn middle(&self) -> Vec2;
     fn middle_with_z(&self, z: f32) -> Vec3;
-    fn bounds_box_inside(&self, size: Vec2) -> Rect<f32>;
-    fn bounds_box_outside(&self, size: Vec2) -> Rect<f32>;
+    fn bounds_box_inside(&self, size: Vec2) -> UiRect<f32>;
+    fn bounds_box_outside(&self, size: Vec2) -> UiRect<f32>;
 }
 
 impl Screen for WindowDescriptor {
@@ -39,8 +39,8 @@ impl Screen for WindowDescriptor {
         return Vec3::new(self.middle_x(), self.middle_y(), z);
     }
 
-    fn bounds_box_inside(&self, size: Vec2) -> Rect<f32> {
-        let rect = Rect::<f32> {
+    fn bounds_box_inside(&self, size: Vec2) -> UiRect<f32> {
+        let rect = UiRect::<f32> {
             top: 1.0 - size.y / 2.0,
             bottom: size.y / 2.0,
             left: size.x / 2.0,
@@ -49,8 +49,8 @@ impl Screen for WindowDescriptor {
         return rect;
     }
 
-    fn bounds_box_outside(&self, size: Vec2) -> Rect<f32> {
-        let rect = Rect::<f32> {
+    fn bounds_box_outside(&self, size: Vec2) -> UiRect<f32> {
+        let rect = UiRect::<f32> {
             top: 1.0 + size.y / 2.0,
             bottom: -size.y / 2.0,
             left: -size.x / 2.0,

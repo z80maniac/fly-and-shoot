@@ -15,7 +15,7 @@ impl AudioTrack {
 
     pub fn play(&mut self, audio: &Res<Audio>, audio_sinks: &Res<Assets<AudioSink>>) {
         if let Some(sink) = self.sink.clone() {
-            if let Some(sink) = audio_sinks.get(sink) {
+            if let Some(sink) = audio_sinks.get(&sink) {
                 if sink.is_paused() {
                     sink.stop();
                     sink.play();
@@ -38,7 +38,7 @@ impl AudioTrack {
 
     pub fn stop(&self, audio_sinks: &Res<Assets<AudioSink>>) {
         if let Some(sink) = self.sink.clone() {
-            if let Some(sink) = audio_sinks.get(sink) {
+            if let Some(sink) = audio_sinks.get(&sink) {
                 if !sink.is_paused() {
                     sink.pause();
                 }

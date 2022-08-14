@@ -64,18 +64,18 @@ impl AnimPlugin {
 
     pub fn text_bundle(font: &Handle<Font>, text: &str, font_size: f32, pos: Vec3) -> Text2dBundle {
         return Text2dBundle {
-            text: Text::with_section(
+            text: Text::from_section(
                 text,
                 TextStyle {
                     font: font.clone(),
                     font_size,
                     color: Color::WHITE,
                 },
-                TextAlignment {
-                    vertical: VerticalAlign::Center,
-                    horizontal: HorizontalAlign::Center,
-                },
-            ),
+            )
+            .with_alignment(TextAlignment {
+                vertical: VerticalAlign::Center,
+                horizontal: HorizontalAlign::Center,
+            }),
             transform: Transform {
                 translation: pos,
                 scale: Vec3::splat(0.001),
